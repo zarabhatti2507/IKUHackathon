@@ -13,6 +13,7 @@ const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 const MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
 const WEBHOOK_SECRET = process.env.ELEVENLABS_WEBHOOK_SECRET;
 const summaries = new Map();
+let latestSummary = null;
 
 const SYSTEM = `You help women prepare for GP appointments.
 You never diagnose. Use phrases like "worth discussing with your GP".
@@ -34,7 +35,7 @@ async function createSummary(transcript, articles = []) {
   return JSON.parse(response.text);
 }
 
-app.post('/api/pos', express.text({ type: 'application/json' }), async (req, res) => {
+app.post('/api/pos', express.text({ type: 'application/json', limit: '1mb' }), async (req, res) => {
   if (!elevenlabs || !WEBHOOK_SECRET) {
     return res.status(503).json({ error: 'ElevenLabs webhook is not configured' });
   }
@@ -64,7 +65,9 @@ app.post('/api/pos', express.text({ type: 'application/json' }), async (req, res
 
   try {
     const summary = await createSummary(formattedTranscript);
-    summaries.set(conversation_id, summary);
+    const processedAt = Date.now();
+    summaries.set(conversation_id, { summary, processedAt });
+    latestSummary = { conversationId: conversation_id, summary, processedAt };
     console.log(`Processed transcript for conversation: ${conversation_id}`);
     return res.status(200).json({ received: true, conversation_id });
   } catch (err) {
@@ -75,10 +78,15 @@ app.post('/api/pos', express.text({ type: 'application/json' }), async (req, res
 
 app.use(express.json({ limit: '1mb' }));
 
+app.get('/api/summary/latest', (req, res) => {
+  if (!latestSummary) return res.status(404).json({ error: 'Summary not found' });
+  res.json(latestSummary);
+});
+
 app.get('/api/summary/:conversationId', (req, res) => {
-  const summary = summaries.get(req.params.conversationId);
-  if (!summary) return res.status(404).json({ error: 'Summary not found' });
-  res.json(summary);
+  const result = summaries.get(req.params.conversationId);
+  if (!result) return res.status(404).json({ error: 'Summary not found' });
+  res.json(result.summary);
 });
 
 app.post('/api/summary', async (req, res) => {

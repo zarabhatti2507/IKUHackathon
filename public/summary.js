@@ -20,6 +20,12 @@ async function getWebhookSummary(conversationId) {
   return await r.json();
 }
 
+async function getLatestWebhookSummary() {
+  const r = await fetch('/api/summary/latest');
+  if (!r.ok) throw new Error('Summary not found');
+  return await r.json();
+}
+
 async function generateSummaryAndDownloadPDF(transcript, articles) {
   const summary = await generateSummary(transcript, articles);
   downloadSummaryPDF(summary);

@@ -503,3 +503,17 @@ h1 {
   0%, 100% { transform: translate(35px, -14px); }
   50%      { transform: translate(-35px, 14px); }
 }
+
+.elevenlabs-shell {
+  max-width: 360px;
+  margin: 12px auto 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--bg-top);
+}
+
+.elevenlabs-shell elevenlabs-convai {
+  display: block;
+  min-height: 72px;
+}
