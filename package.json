@@ -1,0 +1,26 @@
+{
+  "name": "ikuhackathon-1",
+  "version": "1.0.0",
+  "description": "General summary of project to go here!",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zarabhatti2507/IKUHackathon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zarabhatti2507/IKUHackathon/issues"
+  },
+  "homepage": "https://github.com/zarabhatti2507/IKUHackathon#readme",
+  "dependencies": {
+    "@google/genai": "^2.30.0",
+    "dotenv": "^18.0.8",
+    "express": "^5.3.0"
+  }
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <button id="go">Generate summary and download PDF</button>
+  <pre id="out"></pre>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="pdf.js"></script>
+  <script>
+    document.getElementById('go').onclick = async () => {
+      const r = await fetch('/api/summary', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          transcript: "User: My periods have been irregular for 6 months. I also have acne and feel tired a lot.",
+          wearable: { avgSleepHours: 5.2, restingHeartRate: 78 },
+          articles: [{ title: 'Understanding PCOS', link: 'content/pcos.html' }]
+        })
+      });
+      const summary = await r.json();
+      document.getElementById('out').textContent = JSON.stringify(summary, null, 2);
+      downloadSummaryPDF(summary);
+    };
+  </script>
+</body>
+</html>
