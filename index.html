@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HerHealth | HerVoice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Fraunces:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg-waves" aria-hidden="true">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- Soft filled waves at the bottom -->
+      <path class="drift d1" fill="#f4b6cb" fill-opacity="0.30"
+            d="M0 700 C240 640 460 760 740 700 S1200 640 1440 700 L1440 980 L0 980 Z"/>
+      <path class="drift d2" fill="#e77291" fill-opacity="0.12"
+            d="M0 760 C260 710 480 820 760 760 S1200 710 1440 770 L1440 980 L0 980 Z"/>
+
+      <!-- Fine flowing lines, like a gentle voice -->
+      <g class="drift d3" fill="none" stroke="#a62b5b" stroke-linecap="round">
+        <path stroke-width="1.2" stroke-opacity="0.22"
+              d="M-20 640 C200 590 400 700 700 640 S1200 590 1460 650"/>
+        <path stroke-width="1.2" stroke-opacity="0.16"
+              d="M-20 668 C200 618 400 728 700 668 S1200 618 1460 678"/>
+        <path stroke-width="1.2" stroke-opacity="0.11"
+              d="M-20 696 C200 646 400 756 700 696 S1200 646 1460 706"/>
+      </g>
+
+      <!-- Delicate lines in the top-right corner -->
+      <g class="drift d4" fill="none" stroke="#a62b5b" stroke-linecap="round">
+        <path stroke-width="1.2" stroke-opacity="0.16"
+              d="M900 -20 C1050 40 1150 -10 1300 60 S1400 130 1470 100"/>
+        <path stroke-width="1.2" stroke-opacity="0.11"
+              d="M940 -20 C1080 70 1190 20 1320 90 S1410 160 1470 135"/>
+      </g>
+
+    </svg>
+  </div>
+  <header class="site-header">
+    <div class="container header-inner">
+            <a class="brand" href="#" onclick="showScreen('landing'); return false;">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-text">
+          <span class="brand-name">HerHealth</span>
+          <span class="brand-tagline">HerVoice</span>
+        </span>
+      </a>
+      <p class="disclaimer">Not medical advice. This tool helps you prepare for a GP appointment.</p>
+    </div>
+  </header>
+
+
+  <main class="container">
+
+    <!-- SCREEN 1: LANDING -->
+    <section id="landing" class="screen active">
+      <div class="hero">
+        
+        <h1>Prepare for your GP appointment, just by talking</h1>
+        <p class="subtitle">Tell us how you're feeling. We'll listen, ask gentle questions, and give you a clear summary to take to your doctor.</p>
+        <button class="btn btn-primary" onclick="showScreen('talk')">Start talking</button>
+      </div>
+
+            <div class="cards">
+        <article class="card">
+          <span class="tag">Available</span>
+          <h3>PCOS</h3>
+          <p>Irregular periods, acne and hair growth.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Available</span>
+          <h3>Menopause</h3>
+          <p>Hot flushes, sleep and mood changes.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Available</span>
+          <h3>Endometriosis</h3>
+          <p>Pelvic pain, painful or heavy periods and fatigue.</p>
+        </article>
+        <article class="card card-soon">
+          <span class="tag tag-soon">Coming soon</span>
+          <h3>Cancer awareness</h3>
+          <p>Warning signs and when to see a GP.</p>
+        </article>
+      </div>
+
+      <div class="steps">
+        <div class="step"><span class="step-num">1</span><p><strong>Talk</strong><br>Describe how you feel in your own words.</p></div>
+        <div class="step"><span class="step-num">2</span><p><strong>Review</strong><br>See your symptoms organised clearly.</p></div>
+        <div class="step"><span class="step-num">3</span><p><strong>Download</strong><br>Take a PDF summary to your appointment.</p></div>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: TALK -->
+        <!-- SCREEN 2: TALK -->
+    <section id="talk" class="screen">
+      <div id="urgent-banner" class="hidden" role="alert">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3L2 21h20L12 3z"/><path d="M12 10v5M12 18h.01"/>
+        </svg>
+        <p>What you've described may need urgent attention. Please contact your GP, call NHS 111, or call 999 in an emergency.</p>
+      </div>
+
+      <div class="talk-layout">
+
+        <aside class="checklist-box">
+          <h3>What we've covered</h3>
+          <ul id="checklist">
+            <li data-topic="cycle">Periods</li>
+            <li data-topic="pain">Pain</li>
+            <li data-topic="fatigue">Tiredness</li>
+            <li data-topic="mood">Mood</li>
+            <li data-topic="sleep">Sleep</li>
+            <li data-topic="hotFlushes">Hot flushes</li>
+          </ul>
+        </aside>
+
+        <div class="panel">
+          <h2>What brings you here today?</h2>
+          <p class="panel-sub">I’m an AI voice assistant, so speak naturally and share as much or as little as you like.</p>
+
+          <div id="voice-panel">
+            <button id="mic-btn" class="mic idle" aria-label="Start talking"></button>
+            <p id="voice-status" aria-live="polite">Tap to start talking.</p>
+          </div>
+
+          <div id="messages"></div>
+
+          <div class="actions">
+            <button class="btn btn-secondary" onclick="showScreen('landing')">Back</button>
+            <button class="btn btn-primary" onclick="showScreen('summary')">Finish and see my summary</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <!-- SCREEN 3: SUMMARY -->
+    <section id="summary" class="screen">
+      <div class="summary-head">
+        <h2>Your GP summary</h2>
+        <p class="panel-sub">Take this to your appointment. It's a starting point for the conversation, not a diagnosis.</p>
+      </div>
+
+      <div class="doc">
+        <h3>Symptoms you mentioned</h3>
+        <div id="summary-symptoms"><p class="placeholder">Your symptoms will appear here.</p></div>
+
+        <h3>Wearable insights</h3>
+        <div id="summary-wearable"><p class="placeholder">Sleep and heart rate patterns will appear here.</p></div>
+
+        <h3>Questions to ask your GP</h3>
+        <div id="summary-questions"><p class="placeholder">Suggested questions will appear here.</p></div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-secondary" onclick="resetChecklist(); showScreen('landing')">Start again</button>
+        <button class="btn btn-primary" id="download-pdf">Download PDF</button>
+      </div>
+
+      <h3 class="section-title">Helpful guides</h3>
+      <div id="resources" class="cards"></div>
+    </section>
+  </main>
+
+  <script src="ui.js"></script>
+</body>
+</html>

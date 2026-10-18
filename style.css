@@ -1,0 +1,505 @@
+/* 1. Palette and fonts, stored once */
+:root {
+  --bg-top: #fff0f5;
+  --bg-bottom: #ffe0ea;
+  --blush: #f4b6cb;
+  --berry: #a62b5b;
+  --berry-dark: #85204a;
+  --plum: #3d0f2a;
+  --muted: #6b4458;
+  --white: #ffffff;
+  --line: #f0cddb;
+
+    --font-body: 'Playfair Display', Georgia, serif;
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-headline: 'Fraunces', Georgia, serif;
+}
+
+/* 2. Base */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--plum);
+  line-height: 1.6;
+  min-height: 100vh;
+  background: linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+  background-attachment: fixed;
+}
+
+.container {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 0 12px;
+}
+
+/* 3. Header */
+.site-header {
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--berry);
+  text-decoration: none;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.brand-name {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--berry);
+}
+
+.brand-tagline {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+}
+
+.disclaimer {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* 4. Screens: only the active one shows */
+.screen { display: none; padding: 56px 0 72px; }
+.screen.active { display: block; }
+
+/* 5. Landing hero */
+.hero {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 56px;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin: 0 0 16px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  color: var(--berry);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-family: var(--font-headline);
+  font-size: 2.8rem;
+  color: var(--plum);
+}
+
+.subtitle {
+  font-size: 1.15rem;
+  color: var(--muted);
+  margin: 0 auto 32px;
+  max-width: 560px;
+}
+
+/* 6. Buttons */
+.btn {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 14px 34px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, transform 0.15s;
+}
+
+.btn-primary {
+  background: var(--berry);
+  color: var(--white);
+  border: 2px solid var(--berry);
+  box-shadow: 0 6px 16px rgba(166, 43, 91, 0.25);
+}
+.btn-primary:hover { background: var(--berry-dark); border-color: var(--berry-dark); transform: translateY(-1px); }
+
+.btn-secondary {
+  background: var(--white);
+  color: var(--berry);
+  border: 2px solid var(--berry);
+}
+.btn-secondary:hover { background: var(--berry); color: var(--white); }
+
+.btn:focus-visible, .mic:focus-visible {
+  outline: 3px solid var(--plum);
+  outline-offset: 3px;
+}
+
+/* 7. Cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 6px 18px rgba(166, 43, 91, 0.08);
+}
+.card h3 { font-size: 1.3rem; color: var(--berry); margin-top: 14px; }
+.card p { margin: 0; color: var(--muted); }
+
+.card-soon {
+  border-style: dashed;
+  border-color: var(--berry);
+  background: var(--white);
+  box-shadow: none;
+  opacity: 0.5;
+}
+
+.tag {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: var(--berry);
+  color: var(--white);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.tag-soon { background: var(--white); color: var(--berry); border: 1px solid var(--berry); }
+
+/* 8. How it works */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 48px;
+}
+.step { display: flex; gap: 14px; align-items: flex-start; }
+.step p { margin: 0; color: var(--muted); }
+.step strong { color: var(--plum); }
+.step-num {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--berry);
+  color: var(--white);
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+}
+
+/* 9. Talk screen panel */
+.panel {
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 40px 32px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(166, 43, 91, 0.1);
+}
+.panel h2 { font-size: 2rem; color: var(--plum); margin-bottom: 6px; }
+.panel-sub { margin: 0 0 8px; color: var(--muted); }
+
+/* 10. Mic button: icon, ring style and animation all change per state */
+.mic {
+  position: relative;
+  width: 128px;
+  height: 128px;
+  margin: 24px auto 12px;
+  border-radius: 50%;
+  border: 4px solid var(--berry);
+  background: var(--white);
+  color: var(--berry);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s, color 0.2s;
+}
+.mic svg { width: 52px; height: 52px; }
+
+.mic.idle:hover { background: var(--bg-top); }
+
+.mic.listening {
+  background: var(--blush);
+  color: var(--plum);
+  animation: pulse 1.4s infinite;
+}
+
+.mic.thinking { background: var(--white); }
+.mic.thinking::after {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  border: 3px dashed var(--berry);
+  border-radius: 50%;
+  animation: spin 4s linear infinite;
+}
+
+.mic.speaking {
+  background: var(--berry);
+  color: var(--white);
+  animation: pulse 0.9s infinite;
+}
+
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(166, 43, 91, 0.45); }
+  100% { box-shadow: 0 0 0 32px rgba(166, 43, 91, 0); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+#voice-status {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--berry);
+}
+
+/* 11. Chat bubbles */
+#messages {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 24px 0;
+  max-height: 280px;
+  overflow-y: auto;
+  text-align: left;
+}
+.msg { padding: 12px 18px; max-width: 80%; }
+.msg.bot {
+  background: var(--bg-top);
+  border: 1px solid var(--line);
+  border-radius: 18px 18px 18px 4px;
+  align-self: flex-start;
+}
+.msg.user {
+  background: var(--berry);
+  color: var(--white);
+  border-radius: 18px 18px 4px 18px;
+  align-self: flex-end;
+}
+
+.actions { margin-top: 8px; }
+
+/* 12. Urgent banner: icon + thick border + bold text, not just colour */
+#urgent-banner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 720px;
+  margin: 0 auto 20px;
+  padding: 16px 20px;
+  background: var(--white);
+  color: var(--plum);
+  border: 4px solid var(--plum);
+  border-radius: 16px;
+  font-weight: 700;
+  text-align: left;
+}
+#urgent-banner p { margin: 0; }
+#urgent-banner svg { flex: none; }
+
+.hidden { display: none !important; }
+
+/* 13. Phones */
+@media (max-width: 600px) {
+  h1 { font-size: 2.1rem; }
+  .screen { padding: 36px 0 56px; }
+  .panel { padding: 28px 18px; }
+  .header-inner { justify-content: center; text-align: center; }
+}
+
+/* 14. Respect people who turn animations off */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+/* 15. Talk screen: checklist beside the panel */
+.talk-layout {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.talk-layout .panel {
+  flex: 1;
+  min-width: 300px;
+  margin: 0;
+}
+
+.checklist-box {
+  width: 240px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 6px 18px rgba(166, 43, 91, 0.08);
+}
+
+.checklist-box h3 {
+  font-size: 1.15rem;
+  color: var(--berry);
+}
+
+#checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#checklist li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  color: var(--muted);
+}
+
+/* Empty circle = not covered yet */
+#checklist li::before {
+  content: "";
+  flex: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--blush);
+}
+
+/* Filled circle with a tick = covered (shape changes, not just colour) */
+#checklist li.done {
+  color: var(--plum);
+  font-weight: 700;
+}
+
+#checklist li.done::before {
+  content: "✓";
+  background: var(--berry);
+  border-color: var(--berry);
+  color: var(--white);
+  font-size: 0.7rem;
+  display: grid;
+  place-items: center;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* 16. Summary screen */
+.summary-head {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 28px;
+}
+
+.summary-head h2 {
+  font-size: 2.2rem;
+}
+
+.doc {
+  max-width: 760px;
+  margin: 0 auto 28px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(166, 43, 91, 0.1);
+}
+
+.doc h3 {
+  font-size: 1.2rem;
+  color: var(--berry);
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--line);
+  margin-top: 28px;
+}
+
+.doc h3:first-child {
+  margin-top: 0;
+}
+
+.placeholder {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.section-title {
+  max-width: 980px;
+  margin: 48px auto 16px;
+}
+
+@media (max-width: 600px) {
+  .checklist-box { width: 100%; }
+  .doc { padding: 24px 18px; }
+}
+/* 17. Background waves */
+.bg-waves {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Slightly wider than the screen, so the edges never show while the waves sway */
+.bg-waves svg {
+  width: 112%;
+  margin-left: -6%;
+  height: 100%;
+  display: block;
+}
+
+.drift { animation: sway-a 7s ease-in-out infinite; }
+.d2 { animation-name: sway-b; animation-duration: 9s;  animation-delay: -3s; }
+.d3 { animation-name: sway-a; animation-duration: 11s; animation-delay: -5s; }
+.d4 { animation-name: sway-b; animation-duration: 13s; animation-delay: -2s; }
+
+@keyframes sway-a {
+  0%, 100% { transform: translate(-35px, 0); }
+  50%      { transform: translate(35px, -22px); }
+}
+
+@keyframes sway-b {
+  0%, 100% { transform: translate(35px, -14px); }
+  50%      { transform: translate(-35px, 14px); }
+}
