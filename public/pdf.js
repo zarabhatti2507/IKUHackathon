@@ -4,7 +4,7 @@ function downloadSummaryPDF(summary) {
   const margin = 15, width = 180;
   let y = 20;
 
-  function write(text, size = 11, bold = false) {
+  function write(text, size = 12, bold = false) {
     doc.setFontSize(size);
     doc.setFont('helvetica', bold ? 'bold' : 'normal');
     doc.splitTextToSize(text, width).forEach(line => {

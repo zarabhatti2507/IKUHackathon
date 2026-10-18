@@ -30,7 +30,7 @@ app.post('/api/summary', async (req, res) => {
     res.json(JSON.parse(response.text));
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Summary failed' });
+    res.status(500).json({ error: 'We couldn\'t generate your response at this time' });
   }
 });
 
